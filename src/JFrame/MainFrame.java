@@ -1,3 +1,5 @@
+package JFrame;
+
 import javax.swing.*;
 
 public class MainFrame {
