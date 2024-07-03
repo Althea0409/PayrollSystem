@@ -1,4 +1,4 @@
-package JFrame;
+package com.lsu.view;
 
 import javax.swing.*;
 import java.awt.*;
