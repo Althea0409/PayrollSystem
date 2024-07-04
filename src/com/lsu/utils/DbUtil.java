@@ -2,9 +2,6 @@ package com.lsu.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
 public class DbUtil {
     private final String dbDriver = "com.mysql.cj.jdbc.Driver";
     private final String dbUrl = "jdbc:mysql://localhost:3306/payrollsystem?characterEncoding=utf-8";
@@ -17,14 +14,10 @@ public class DbUtil {
         return con;
     }
 
-    public void closeCon(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
-    }
-
     public void closeCon (Connection con)throws Exception {
         if(con!=null){
             con.close();
         }
     }
-
 
 }

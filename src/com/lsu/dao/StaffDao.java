@@ -17,14 +17,13 @@ public class StaffDao {
         dbUtil = new DbUtil();
     }
 
-    // 保存员工信息
-    public int saveStaffInfo(int staffId, String name, String gender, String birthDate, String joinDate, int dptId,
-                             String dptName, String position, String title, String polStatus, String marStatus) throws Exception {
+    // 保存员工信息到数据库
+    public int saveStaffInfo(int staffId, String name, String gender, String birthDate, String joinDate, int dptId, String dptName, String position, String title, String polStatus, String marStatus) throws Exception {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
             con = dbUtil.getConnection();
-            String sql = "INSERT INTO staff (StaffID, Name, Gender, BirthDate, JoinDate, DptID, DptName, Position, Title, PolStatus, MarStatus) " +
+            String sql = "INSERT INTO staff (StaffId, Name, Gender, BirthDate, JoinDate, DptId, DptName, Position, Title, PolStatus, MarStatus) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, staffId);
@@ -62,12 +61,12 @@ public class StaffDao {
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Staff staff = new Staff(
-                        rs.getInt("StaffID"),
+                        rs.getInt("StaffId"),
                         rs.getString("Name"),
                         rs.getString("Gender"),
                         rs.getString("BirthDate"),
                         rs.getString("JoinDate"),
-                        rs.getInt("DptID"),
+                        rs.getInt("DptId"),
                         rs.getString("DptName"),
                         rs.getString("Position"),
                         rs.getString("Title"),
@@ -89,12 +88,12 @@ public class StaffDao {
     }
 
     // 更新员工信息
-    public int updateStaffInfo(Staff staff) throws Exception {
+    public int updateStaff(Staff staff) throws Exception {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
             con = dbUtil.getConnection();
-            String sql = "UPDATE staff SET Name=?, Gender=?, BirthDate=?, JoinDate=?, DptID=?, DptName=?, Position=?, Title=?, PolStatus=?, MarStatus=? WHERE StaffID=?";
+            String sql = "UPDATE staff SET Name=?, Gender=?, BirthDate=?, JoinDate=?, DptId=?, DptName=?, Position=?, Title=?, PolStatus=?, MarStatus=? WHERE StaffID=?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, staff.getName());
             pstmt.setString(2, staff.getGender());
@@ -121,12 +120,12 @@ public class StaffDao {
     }
 
     // 删除员工信息
-    public int deleteStaffInfo(int staffId) throws Exception {
+    public int deleteStaff(int staffId) throws Exception {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
             con = dbUtil.getConnection();
-            String sql = "DELETE FROM staff WHERE StaffID=?";
+            String sql = "DELETE FROM staff WHERE StaffId=?";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, staffId);
             return pstmt.executeUpdate();

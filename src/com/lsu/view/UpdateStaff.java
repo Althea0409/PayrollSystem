@@ -28,13 +28,14 @@ public class UpdateStaff extends JDialog {
         this.staffDao = staffDao;
 
         setTitle("修改员工信息");
-        setSize(550, 600);
+        setSize(550, 550);
         setLocationRelativeTo(parent);
 
         initializeUI();
         populateFields();
     }
 
+    // 初始化界面
     private void initializeUI() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -193,6 +194,7 @@ public class UpdateStaff extends JDialog {
         setContentPane(mainPanel);
     }
 
+    // 根据传入的Staff对象，填充表单字段
     private void populateFields() {
         nameField.setText(staff.getName());
         genderField.setText(staff.getGender());
@@ -206,6 +208,7 @@ public class UpdateStaff extends JDialog {
         marStatusField.setText(staff.getMarStatus());
     }
 
+    // 更新员工信息
     private void updateStaff() {
         staff.setName(nameField.getText());
         staff.setGender(genderField.getText());
@@ -219,7 +222,7 @@ public class UpdateStaff extends JDialog {
         staff.setMarStatus(marStatusField.getText());
 
         try {
-            int rowsAffected = staffDao.updateStaffInfo(staff);
+            int rowsAffected = staffDao.updateStaff(staff);
             if (rowsAffected > 0) {
                 JOptionPane.showMessageDialog(this, "员工信息修改成功。");
                 if (getParent() instanceof StaffAlter) {

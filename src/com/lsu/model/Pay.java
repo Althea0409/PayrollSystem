@@ -1,94 +1,127 @@
 package com.lsu.model;
 
 public class Pay {
-    private Integer StaffId;
-    private String Name;
-    private String BasicPay;
-    private String PositionPay;
-    private String HouseAllowance;
-    private String Allowance;
-    private String UnionFee;
-    private String WEFee;
-    private String HouseFund;
-    private String Pension;
-    private String BonusPenalty;
+    private Integer staffId;
+    private String name;
+    private double basicPay;
+    private double positionPay;
+    private double houseAllowance;
+    private double allowance;
+    private double unionFee;
+    private double weFee;
+    private double houseFund;
+    private double pension;
+    private double bonusPenalty;
 
-    // getter and setter
-    public int getStaffId() {
-        return StaffId;
+    public Pay() {
     }
-    public void setStaffId(int StaffId) {
-        this.StaffId=StaffId;
+
+    public Pay(int staffId, double basicPay, double positionPay, double houseAllowance, double allowance, double unionFee, double weFee, double houseFund, double pension, double bonusPenalty) {
+        this.staffId = staffId;
+        this.basicPay = basicPay;
+        this.positionPay = positionPay;
+        this.houseAllowance = houseAllowance;
+        this.allowance = allowance;
+        this.unionFee = unionFee;
+        this.weFee = weFee;
+        this.houseFund = houseFund;
+        this.pension = pension;
+        this.bonusPenalty = bonusPenalty;
+    }
+
+    // Getters and Setters
+    public Integer getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(Integer staffId) {
+        this.staffId = staffId;
     }
 
     public String getName() {
-        return Name;
-    }
-    public void setName(String Name) {
-        this.Name=Name;
+        return name;
     }
 
-    public String BasicPay() {
-        return BasicPay;
-    }
-    public void setBasicPay(String BasicPay) {
-        this.BasicPay=BasicPay;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPositionPay() {
-        return PositionPay;
-    }
-    public void setPositionPay(String PositionPay) {
-        this.PositionPay=PositionPay;
+    public double getBasicPay() {
+        return basicPay;
     }
 
-    public String getHouseAllowance() {
-        return HouseAllowance;
-    }
-    public void setHouseAllowance(String HouseAllowance) {
-        this.HouseAllowance=HouseAllowance;
+    public void setBasicPay(double basicPay) {
+        this.basicPay = basicPay;
     }
 
-    public String Allowance() {
-        return Allowance;
-    }
-    public void setAllowance(String Allowance) {
-        this.Allowance=Allowance;
+    public double getPositionPay() {
+        return positionPay;
     }
 
-    public String getUnionFee() {
-        return UnionFee;
-    }
-    public void setUnionFee(String UnionFee) {
-        this.UnionFee=UnionFee;
+    public void setPositionPay(double positionPay) {
+        this.positionPay = positionPay;
     }
 
-    public String getWEFee() {
-        return WEFee;
-    }
-    public void setWEFee(String WEFee) {
-        this.WEFee=WEFee;
+    public double getHouseAllowance() {
+        return houseAllowance;
     }
 
-    public String getHouseFund() {
-        return HouseFund;
-    }
-    public void setHouseFund(String HouseFund) {
-        this.HouseFund=HouseFund;
+    public void setHouseAllowance(double houseAllowance) {
+        this.houseAllowance = houseAllowance;
     }
 
-    public String getPension() {
-        return Pension;
-    }
-    public void setPension(String Pension) {
-        this.Pension=Pension;
+    public double getAllowance() {
+        return allowance;
     }
 
-    public String getBonusPenalty() {
-        return BonusPenalty;
-    }
-    public void setBonusPenalty(String BonusPenalty) {
-        this.BonusPenalty=BonusPenalty;
+    public void setAllowance(double allowance) {
+        this.allowance = allowance;
     }
 
+    public double getUnionFee() {
+        return unionFee;
+    }
+
+    public void setUnionFee(double unionFee) {
+        this.unionFee = unionFee;
+    }
+
+    public double getWeFee() {
+        return weFee;
+    }
+
+    public void setWeFee(double weFee) {
+        this.weFee = weFee;
+    }
+
+    public double getHouseFund() {
+        return houseFund;
+    }
+
+    public void setHouseFund(double houseFund) {
+        this.houseFund = houseFund;
+    }
+
+    public double getPension() {
+        return pension;
+    }
+
+    public void setPension(double pension) {
+        this.pension = pension;
+    }
+
+    public double getBonusPenalty() {
+        return bonusPenalty;
+    }
+
+    public void setBonusPenalty(double bonusPenalty) {
+        this.bonusPenalty = bonusPenalty;
+    }
+
+    // 将工资对象转换为对象数组
+    public Object[] toObjectArray() {
+        return new Object[] {
+                staffId, basicPay, positionPay, houseAllowance, allowance, unionFee, weFee, houseFund, pension, bonusPenalty
+        };
+    }
 }

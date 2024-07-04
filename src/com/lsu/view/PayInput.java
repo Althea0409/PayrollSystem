@@ -25,7 +25,11 @@ public class PayInput extends JInternalFrame {
     public PayInput() {
         super("工资信息输入", true, true, true, true);
 
-        payDao = new PayDao(); // 实例化 PayDao 对象
+        try {
+            payDao = new PayDao(); // 实例化 PayDao 对象
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -207,8 +211,8 @@ public class PayInput extends JInternalFrame {
             double pension = Double.parseDouble(pensionField.getText());
             double bonusPenalty = Double.parseDouble(bonusPenaltyField.getText());
 
-            boolean isSaved = payDao.savePayInfo(staffId, basicPay, positionPay, houseAllowance, allowance, unionFee, weFee, houseFund, pension, bonusPenalty);
-            if (isSaved) {
+            int isSaved = payDao.savePay(staffId, basicPay, positionPay, houseAllowance, allowance, unionFee, weFee, houseFund, pension, bonusPenalty);
+            if (isSaved == 1) {
                 JOptionPane.showMessageDialog(this, "员工工资信息保存成功！");
             } else {
                 JOptionPane.showMessageDialog(this, "员工工资信息保存失败！");

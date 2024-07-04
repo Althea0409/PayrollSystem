@@ -123,8 +123,8 @@ public class DptInput extends JInternalFrame {
             String dptHead = dptHeadField.getText();
             int dptNum = Integer.parseInt(dptNumField.getText());
 
-            boolean isSaved = dptDao.saveDepartmentInfo(dptId, dptName, dptHead, dptNum);
-            if (isSaved) {
+            int isSaved = dptDao.saveDptInfo(dptId, dptName, dptHead, dptNum);
+            if (isSaved == 1) {
                 JOptionPane.showMessageDialog(this, "部门信息保存成功！");
             } else {
                 JOptionPane.showMessageDialog(this, "部门信息保存失败！");

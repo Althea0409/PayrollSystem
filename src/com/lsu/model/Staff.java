@@ -111,6 +111,8 @@ public class Staff {
 
     // 将员工对象转换为对象数组
     public Object[] toObjectArray() {
-        return new Object[]{staffId, name, gender, birthDate, joinDate, dptId, dptName, position, title, polStatus, marStatus};
+        return new Object[]{
+                staffId, name, gender, birthDate, joinDate, dptId, dptName, position, title, polStatus, marStatus
+        };
     }
 }

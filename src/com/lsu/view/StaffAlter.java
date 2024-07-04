@@ -33,6 +33,7 @@ public class StaffAlter extends JInternalFrame {
         }
     }
 
+    // 加载全部表格
     private void initializeUI() {
         JPanel mainPanel = new JPanel(new BorderLayout());
 
@@ -75,7 +76,7 @@ public class StaffAlter extends JInternalFrame {
                 int confirm = JOptionPane.showConfirmDialog(this, "确定要删除该员工信息吗？");
                 if (confirm == JOptionPane.YES_OPTION) {
                     try {
-                        int rowsAffected = staffDao.deleteStaffInfo(staffId);
+                        int rowsAffected = staffDao.deleteStaff(staffId);
                         if (rowsAffected > 0) {
                             JOptionPane.showMessageDialog(this, "员工信息删除成功。");
                             refreshStaffTable();
@@ -94,6 +95,7 @@ public class StaffAlter extends JInternalFrame {
         setContentPane(mainPanel);
     }
 
+    // 刷新表格
     void refreshStaffTable() throws Exception {
         List<Staff> staffList = staffDao.getAllStaff();
         tableModel.setRowCount(0);
@@ -103,6 +105,7 @@ public class StaffAlter extends JInternalFrame {
         }
     }
 
+    // 从表格中获取员工信息
     private Staff fetchStaffFromTable(int row) {
         int staffId = (int) staffTable.getValueAt(row, 0);
         String name = (String) staffTable.getValueAt(row, 1);
