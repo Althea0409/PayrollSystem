@@ -13,8 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ActionListener;
 
-
-public class RegForm extends JFrame {
+public class RegFrame extends JFrame {
 
     private final JFrame jf;
     private final JTextField textField;
@@ -23,14 +22,15 @@ public class RegForm extends JFrame {
     private final JLabel usernameMes;
     private final JLabel passwordMes;
     private final JLabel phoneMes;
-    private final JRadioButton rdbtnNewRadioButton_1;
     private final JRadioButton rdbtnNewRadioButton;
+    private final JRadioButton rdbtnNewRadioButton_1;
 
     DbUtil dbUtil = new DbUtil();
     UserDao userDao = new UserDao();
 
-    public RegForm() {
-        // 窗口
+    // 注册窗口
+    public RegFrame() {
+
         setSize(500, 400);
         setLocationRelativeTo(null);
         jf=new JFrame("用户注册");
@@ -231,7 +231,7 @@ public class RegForm extends JFrame {
         button_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 jf.setVisible(false);
-                new LoginForm();
+                new LoginFrame();
             }
         });
         button_1.setFont(new Font("幼圆", Font.BOLD, 15));
@@ -241,6 +241,8 @@ public class RegForm extends JFrame {
         jf.setVisible(true);
         jf.setResizable(true);
     }
+
+    // 注册验证
     protected void RegCheck(ActionEvent e) {
         String username=textField.getText();
         String password=textField_1.getText();
@@ -272,7 +274,7 @@ public class RegForm extends JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "注册成功");
                 jf.dispose();
-                new LoginForm();
+                new LoginFrame();
             }
         } catch (Exception e1) {
             e1.printStackTrace();

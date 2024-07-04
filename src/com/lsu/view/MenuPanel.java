@@ -48,15 +48,6 @@ public class MenuPanel extends JPanel {
             }
         });
 
-        JMenuItem staffCount = new JMenuItem("统计");
-        staffMenu.add(staffCount);
-        staffCount.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                setContent(new StaffCount());
-            }
-        });
-
         // 工资信息操作
         JMenu payMenu = new JMenu("工资信息");
         menuBar.add(payMenu);
@@ -142,14 +133,20 @@ public class MenuPanel extends JPanel {
         menuBar.add(exitMenu);
         exitMenu.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e){
-                String message = "欢迎再次使用！";
-                int option = JOptionPane.showConfirmDialog(null, message, "欢迎", JOptionPane.DEFAULT_OPTION);
-                if (option == JOptionPane.OK_OPTION) {
-                    System.exit(0);
+            public void mousePressed(MouseEvent e) {
+                // 退出系统逻辑
+                String message = "确定退出系统吗？";
+                int option = JOptionPane.showConfirmDialog(null, message, "确认退出", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    System.exit(0); // 退出程序
                 }
             }
         });
+    }
+
+    // 设置初始显示的页面
+    public void setInitialContent() {
+        setContent(new StaffInput());
     }
 
     public static void setContent(JInternalFrame internalFrame) {

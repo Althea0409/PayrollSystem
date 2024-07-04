@@ -2,6 +2,7 @@ package com.lsu.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+
 public class DbUtil {
     private final String dbDriver = "com.mysql.cj.jdbc.Driver";
     private final String dbUrl = "jdbc:mysql://localhost:3306/payrollsystem?characterEncoding=utf-8";

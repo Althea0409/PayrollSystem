@@ -10,7 +10,7 @@ public class UserDao {
 
     public Users login(Connection con, Users user)throws Exception {
         Users resultUser = null;
-        String sql = "select * from user where username=? and password=? and role = ?";
+        String sql = "select * from users where UserName=? and Password=? and Role = ?";
         PreparedStatement pstmt = (PreparedStatement) con.prepareStatement(sql);
         pstmt.setString(1,user.getUserName());
         pstmt.setString(2,user.getPassword());
@@ -18,17 +18,17 @@ public class UserDao {
         ResultSet rs = pstmt.executeQuery();
         if(rs.next()){
             resultUser = new Users();
-            resultUser.setUserId(rs.getInt("id"));
-            resultUser.setUserName(rs.getString("username"));
-            resultUser.setSex(rs.getString("sex"));
-            resultUser.setPhone(rs.getString("phone"));
+            resultUser.setUserId(rs.getInt("UserId"));
+            resultUser.setUserName(rs.getString("UserName"));
+            resultUser.setSex(rs.getString("Sex"));
+            resultUser.setPhone(rs.getString("Phone"));
         }
         return resultUser;
     }
 
     public int addUser(Connection con, Users user) throws Exception{
         //查询注册用户名是否存在
-        String sql = "select * from user where userName=? ";
+        String sql = "select * from User where UserName=? ";
         PreparedStatement pstmt = (PreparedStatement) con.prepareStatement(sql);
         pstmt.setString(1,user.getUserName());
         ResultSet rs = pstmt.executeQuery();
@@ -36,7 +36,7 @@ public class UserDao {
             return 2;
         }
 
-        sql="insert into user (username,password,role,sex,phone) values (?,?,?,?,?)";
+        sql="insert into users (UserName,Password,Role,Sex,Phone) values (?,?,?,?,?)";
         PreparedStatement pstmt2=(PreparedStatement) con.prepareStatement(sql);
         pstmt2.setString(1, user.getUserName());
         pstmt2.setString(2, user.getPassword());
@@ -48,7 +48,7 @@ public class UserDao {
 
 
     public ResultSet list(Connection con, Users user)throws Exception{
-        StringBuffer sb=new StringBuffer("select * from user where role = 1");
+        StringBuffer sb=new StringBuffer("select * from users where Role = 1");
         if(!ToolUtil.isEmpty(user.getUserName())){
             sb.append(" and username like '%"+user.getUserName()+"%'");
         }
@@ -57,7 +57,7 @@ public class UserDao {
     }
 
     public int update(Connection con, Users user)throws Exception{
-        String sql="update user set username=?,password=?,sex=?,phone=? where id=?";
+        String sql="update users set UserName=?,Password=?,Sex=?,Phone=? where UserId=?";
         PreparedStatement pstmt=(PreparedStatement) con.prepareStatement(sql);
         pstmt.setString(1, user.getUserName());
         pstmt.setString(2, user.getPassword());

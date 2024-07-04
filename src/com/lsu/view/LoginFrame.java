@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginForm extends JFrame {
+public class LoginFrame extends JFrame {
 
     private final JTextField userTextField;
     private final JPasswordField passTextField;
@@ -18,7 +18,7 @@ public class LoginForm extends JFrame {
     private final DbUtil dbUtil = new DbUtil();
     private final UserDao userDao = new UserDao();
 
-    public LoginForm() {
+    public LoginFrame() {
         // 创建主窗口
         setTitle("员工工资管理系统");
         setSize(500, 400);
@@ -96,7 +96,7 @@ public class LoginForm extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                checkLogin(e);
+                checkLogin();
             }
         });
 
@@ -125,11 +125,11 @@ public class LoginForm extends JFrame {
     // 注册按钮点击事件
     protected void regUser(ActionEvent e) {
         this.setVisible(false);
-        new RegForm();
+        new RegFrame();
     }
 
     // 登录按钮点击事件
-    protected void checkLogin(ActionEvent e) {
+    protected void checkLogin() {
         String userName = userTextField.getText();
         String password = new String(passTextField.getPassword());
         int index = roleComboBox.getSelectedIndex();
@@ -181,6 +181,6 @@ public class LoginForm extends JFrame {
             e.printStackTrace();
         }
 
-        new LoginForm();
+        new LoginFrame();
     }
 }
