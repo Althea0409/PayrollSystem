@@ -79,15 +79,6 @@ public class MenuPanel extends JPanel {
             }
         });
 
-        JMenuItem payCount = new JMenuItem("统计");
-        payMenu.add(payCount);
-        payCount.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                setContent(new PayCount());
-            }
-        });
-
         // 部门信息操作
         JMenu dptMenu = new JMenu("部门信息");
         menuBar.add(dptMenu);
