@@ -1,14 +1,11 @@
 package com.lsu.view;
 
-import com.lsu.utils.DbUtil;
+import com.lsu.dao.PayDao;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class PayInput extends JInternalFrame {
 
@@ -23,12 +20,12 @@ public class PayInput extends JInternalFrame {
     private final JTextField pensionField;
     private final JTextField bonusPenaltyField;
 
-    private final DbUtil dbUtil;
+    private final PayDao payDao;
 
     public PayInput() {
         super("工资信息输入", true, true, true, true);
 
-        dbUtil = new DbUtil(); // 实例化 DbUtil 对象
+        payDao = new PayDao(); // 实例化 PayDao 对象
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -198,40 +195,29 @@ public class PayInput extends JInternalFrame {
 
     // 保存员工工资信息到数据库
     private void savePayInfo() {
-        Connection con = null;
-        PreparedStatement pstmt = null;
         try {
-            con = dbUtil.getConnection(); // 使用 DbUtil 获取连接
-            String sql = "INSERT INTO pay (StaffID, BasicPay, PositionPay, HouseAllowance, Allowance, UnionFee, WEFee, HouseFund, Pension, BonusPenalty) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, Integer.parseInt(staffIdField.getText()));
-            pstmt.setDouble(2, Double.parseDouble(basicPayField.getText()));
-            pstmt.setDouble(3, Double.parseDouble(positionPayField.getText()));
-            pstmt.setDouble(4, Double.parseDouble(houseAllowanceField.getText()));
-            pstmt.setDouble(5, Double.parseDouble(allowanceField.getText()));
-            pstmt.setDouble(6, Double.parseDouble(unionFeeField.getText()));
-            pstmt.setDouble(7, Double.parseDouble(weFeeField.getText()));
-            pstmt.setDouble(8, Double.parseDouble(houseFundField.getText()));
-            pstmt.setDouble(9, Double.parseDouble(pensionField.getText()));
-            pstmt.setDouble(10, Double.parseDouble(bonusPenaltyField.getText()));
-            int rowsInserted = pstmt.executeUpdate();
-            if (rowsInserted > 0) {
+            int staffId = Integer.parseInt(staffIdField.getText());
+            double basicPay = Double.parseDouble(basicPayField.getText());
+            double positionPay = Double.parseDouble(positionPayField.getText());
+            double houseAllowance = Double.parseDouble(houseAllowanceField.getText());
+            double allowance = Double.parseDouble(allowanceField.getText());
+            double unionFee = Double.parseDouble(unionFeeField.getText());
+            double weFee = Double.parseDouble(weFeeField.getText());
+            double houseFund = Double.parseDouble(houseFundField.getText());
+            double pension = Double.parseDouble(pensionField.getText());
+            double bonusPenalty = Double.parseDouble(bonusPenaltyField.getText());
+
+            boolean isSaved = payDao.savePayInfo(staffId, basicPay, positionPay, houseAllowance, allowance, unionFee, weFee, houseFund, pension, bonusPenalty);
+            if (isSaved) {
                 JOptionPane.showMessageDialog(this, "员工工资信息保存成功！");
+            } else {
+                JOptionPane.showMessageDialog(this, "员工工资信息保存失败！");
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "请输入有效的数字！", "输入错误", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            try {
-                if (pstmt != null) pstmt.close();
-                if (con != null) dbUtil.closeCon(con); // 使用 DbUtil 关闭连接
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            JOptionPane.showMessageDialog(this, "保存员工工资信息时发生错误！", "错误", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -248,5 +234,4 @@ public class PayInput extends JInternalFrame {
         pensionField.setText("");
         bonusPenaltyField.setText("");
     }
-
 }

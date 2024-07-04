@@ -119,15 +119,6 @@ public class MenuPanel extends JPanel {
             }
         });
 
-        JMenuItem dptCount = new JMenuItem("统计");
-        dptMenu.add(dptCount);
-        dptCount.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                setContent(new DptCount());
-            }
-        });
-
         // 退出当前系统
         JMenu exitMenu = new JMenu("退出系统");
         menuBar.add(exitMenu);

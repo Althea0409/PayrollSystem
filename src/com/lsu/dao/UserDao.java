@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 public class UserDao {
 
+    // 用户登录
     public Users login(Connection con, Users user)throws Exception {
         Users resultUser = null;
         String sql = "select * from users where UserName=? and Password=? and Role = ?";
@@ -26,6 +27,7 @@ public class UserDao {
         return resultUser;
     }
 
+    // 用户注册
     public int addUser(Connection con, Users user) throws Exception{
         //查询注册用户名是否存在
         String sql = "select * from User where UserName=? ";
@@ -46,7 +48,7 @@ public class UserDao {
         return pstmt2.executeUpdate();
     }
 
-
+    // 用户列表
     public ResultSet list(Connection con, Users user)throws Exception{
         StringBuffer sb=new StringBuffer("select * from users where Role = 1");
         if(!ToolUtil.isEmpty(user.getUserName())){
@@ -56,6 +58,7 @@ public class UserDao {
         return pstmt.executeQuery();
     }
 
+    // 删除用户
     public int update(Connection con, Users user)throws Exception{
         String sql="update users set UserName=?,Password=?,Sex=?,Phone=? where UserId=?";
         PreparedStatement pstmt=(PreparedStatement) con.prepareStatement(sql);

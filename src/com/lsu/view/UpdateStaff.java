@@ -1,55 +1,50 @@
 package com.lsu.view;
 
 import com.lsu.dao.StaffDao;
+import com.lsu.model.Staff;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-public class StaffInput extends JInternalFrame {
-
-    private final JTextField staffIdField;
-    private final JTextField nameField;
-    private final JComboBox<String> genderComboBox;
-    private final JTextField birthDateField;
-    private final JTextField joinDateField;
-    private final JTextField dptIdField;
-    private final JTextField dptNameField;
-    private final JTextField positionField;
-    private final JTextField titleField;
-    private final JTextField polStatusField;
-    private final JTextField marStatusField;
-
+public class UpdateStaff extends JDialog {
     private final StaffDao staffDao;
+    private final Staff staff;
 
-    public StaffInput() {
-        super("员工信息输入", true, true, true, true);
+    private JTextField nameField;
+    private JTextField genderField;
+    private JTextField birthDateField;
+    private JTextField joinDateField;
+    private JTextField dptIdField;
+    private JTextField dptNameField;
+    private JTextField positionField;
+    private JTextField titleField;
+    private JTextField polStatusField;
+    private JTextField marStatusField;
 
-        staffDao = new StaffDao();
+    public UpdateStaff(StaffAlter parent, Staff staff, StaffDao staffDao) {
+        super();
+        this.staff = staff;
+        this.staffDao = staffDao;
 
+        setTitle("修改员工信息");
+        setSize(550, 600);
+        setLocationRelativeTo(parent);
+
+        initializeUI();
+        populateFields();
+    }
+
+    private void initializeUI() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
         gbc.insets = new Insets(10, 10, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
-
-        // 员工编号
         gbc.fill = GridBagConstraints.HORIZONTAL; // 使用水平填充
-        JLabel staffIdLabel = new JLabel("员工编号:");
-        staffIdLabel.setFont(new Font("幼圆", Font.BOLD, 18));
-        mainPanel.add(staffIdLabel, gbc);
-
-        staffIdField = new JTextField(20);
-        staffIdField.setFont(new Font("幼圆", Font.PLAIN, 16));
-        gbc.gridx = 1;
-        mainPanel.add(staffIdField, gbc);
 
         // 姓名
-        gbc.gridy++;
         gbc.gridx = 0;
+        gbc.gridy = 0;
         JLabel nameLabel = new JLabel("姓名:");
         nameLabel.setFont(new Font("幼圆", Font.BOLD, 18));
         mainPanel.add(nameLabel, gbc);
@@ -66,10 +61,10 @@ public class StaffInput extends JInternalFrame {
         genderLabel.setFont(new Font("幼圆", Font.BOLD, 18));
         mainPanel.add(genderLabel, gbc);
 
-        genderComboBox = new JComboBox<>(new String[]{"男", "女"});
-        genderComboBox.setFont(new Font("幼圆", Font.PLAIN, 16));
+        genderField = new JTextField(20);
+        genderField.setFont(new Font("幼圆", Font.PLAIN, 16));
         gbc.gridx = 1;
-        mainPanel.add(genderComboBox, gbc);
+        mainPanel.add(genderField, gbc);
 
         // 出生日期
         gbc.gridy++;
@@ -83,10 +78,10 @@ public class StaffInput extends JInternalFrame {
         gbc.gridx = 1;
         mainPanel.add(birthDateField, gbc);
 
-        // 参加工作时间
+        // 入职日期
         gbc.gridy++;
         gbc.gridx = 0;
-        JLabel joinDateLabel = new JLabel("参加工作时间:");
+        JLabel joinDateLabel = new JLabel("入职日期:");
         joinDateLabel.setFont(new Font("幼圆", Font.BOLD, 18));
         mainPanel.add(joinDateLabel, gbc);
 
@@ -171,29 +166,22 @@ public class StaffInput extends JInternalFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10)); // 流式布局，居中对齐
 
-        // 重置按钮
-        JButton resetButton = new JButton("重置");
-        resetButton.setFont(new Font("幼圆", Font.BOLD, 18));
-        resetButton.setPreferredSize(new Dimension(100, 35));
-        resetButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                resetFields();
-            }
+        // 修改按钮
+        JButton updateButton = new JButton("修改");
+        updateButton.setFont(new Font("幼圆", Font.BOLD, 18));
+        updateButton.setPreferredSize(new Dimension(100, 35));
+        updateButton.addActionListener(e -> {
+            updateStaff();
+            dispose();
         });
-        buttonPanel.add(resetButton);
+        buttonPanel.add(updateButton);
 
-        // 保存按钮
-        JButton saveButton = new JButton("保存");
-        saveButton.setFont(new Font("幼圆", Font.BOLD, 18));
-        saveButton.setPreferredSize(new Dimension(100, 35));
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saveEmployeeInfo();
-            }
-        });
-        buttonPanel.add(saveButton);
+        // 取消按钮
+        JButton cancelButton = new JButton("取消");
+        cancelButton.setFont(new Font("幼圆", Font.BOLD, 18));
+        cancelButton.setPreferredSize(new Dimension(100, 35));
+        cancelButton.addActionListener(e -> dispose());
+        buttonPanel.add(cancelButton);
 
         // 添加按钮面板
         gbc.gridy++;
@@ -202,51 +190,49 @@ public class StaffInput extends JInternalFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         mainPanel.add(buttonPanel, gbc);
 
-        add(mainPanel);
-        pack(); // 调整内部窗口的大小以适应内容
-        setVisible(true);
+        setContentPane(mainPanel);
     }
 
-    // 重置功能
-    private void resetFields() {
-        staffIdField.setText("");
-        nameField.setText("");
-        genderComboBox.setSelectedIndex(0);
-        birthDateField.setText("");
-        joinDateField.setText("");
-        dptIdField.setText("");
-        dptNameField.setText("");
-        positionField.setText("");
-        titleField.setText("");
-        polStatusField.setText("");
-        marStatusField.setText("");
+    private void populateFields() {
+        nameField.setText(staff.getName());
+        genderField.setText(staff.getGender());
+        birthDateField.setText(staff.getBirthDate());
+        joinDateField.setText(staff.getJoinDate());
+        dptIdField.setText(String.valueOf(staff.getDptId()));
+        dptNameField.setText(staff.getDptName());
+        positionField.setText(staff.getPosition());
+        titleField.setText(staff.getTitle());
+        polStatusField.setText(staff.getPolStatus());
+        marStatusField.setText(staff.getMarStatus());
     }
 
-    // 保存功能
-    private void saveEmployeeInfo() {
-        int staffId = Integer.parseInt(staffIdField.getText().trim());
-        String name = nameField.getText().trim();
-        String gender = (String) genderComboBox.getSelectedItem();
-        String birthDate = birthDateField.getText().trim();
-        String joinDate = joinDateField.getText().trim();
-        int dptId = Integer.parseInt(dptIdField.getText().trim());
-        String dptName = dptNameField.getText().trim();
-        String position = positionField.getText().trim();
-        String title = titleField.getText().trim();
-        String polStatus = polStatusField.getText().trim();
-        String marStatus = marStatusField.getText().trim();
+    private void updateStaff() {
+        staff.setName(nameField.getText());
+        staff.setGender(genderField.getText());
+        staff.setBirthDate(birthDateField.getText());
+        staff.setJoinDate(joinDateField.getText());
+        staff.setDptId(Integer.parseInt(dptIdField.getText()));
+        staff.setDptName(dptNameField.getText());
+        staff.setPosition(positionField.getText());
+        staff.setTitle(titleField.getText());
+        staff.setPolStatus(polStatusField.getText());
+        staff.setMarStatus(marStatusField.getText());
 
         try {
-            int result = staffDao.saveStaffInfo(staffId, name, gender, birthDate, joinDate, dptId, dptName, position, title, polStatus, marStatus);
-            if (result == 1) {
-                JOptionPane.showMessageDialog(this, "员工信息保存成功！");
-                resetFields();
+            int rowsAffected = staffDao.updateStaffInfo(staff);
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(this, "员工信息修改成功。");
+                if (getParent() instanceof StaffAlter) {
+                    ((StaffAlter) getParent()).refreshStaffTable();
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "员工信息保存失败，请重试！");
+                JOptionPane.showMessageDialog(this, "修改员工信息失败。");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "数据库错误：" + e.getMessage());
+            JOptionPane.showMessageDialog(this, "修改员工信息失败：" + e.getMessage());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "部门编号必须是整数。");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
