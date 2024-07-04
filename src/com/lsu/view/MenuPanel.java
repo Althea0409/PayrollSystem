@@ -17,12 +17,12 @@ public class MenuPanel extends JPanel {
         contentPanel.removeAll();
         contentPanel.repaint();
 
-        // 员工信息操作
-        JMenu staffMenu = new JMenu("员工信息");
-        menuBar.add(staffMenu);
+        // 员工信息录入
+        JMenu inputMenu = new JMenu("员工信息录入");
+        menuBar.add(inputMenu);
 
-        JMenuItem staffInput = new JMenuItem("输入");
-        staffMenu.add(staffInput);
+        JMenuItem staffInput = new JMenuItem("基本信息");
+        inputMenu.add(staffInput);
         staffInput.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -30,30 +30,8 @@ public class MenuPanel extends JPanel {
             }
         });
 
-        JMenuItem staffAlter = new JMenuItem("修改");
-        staffMenu.add(staffAlter);
-        staffAlter.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                setContent(new StaffAlter());
-            }
-        });
-
-        JMenuItem staffSearch = new JMenuItem("查询");
-        staffMenu.add(staffSearch);
-        staffSearch.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                setContent(new StaffSearch());
-            }
-        });
-
-        // 工资信息操作
-        JMenu payMenu = new JMenu("工资信息");
-        menuBar.add(payMenu);
-
-        JMenuItem payInput = new JMenuItem("输入");
-        payMenu.add(payInput);
+        JMenuItem payInput = new JMenuItem("工资信息");
+        inputMenu.add(payInput);
         payInput.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -61,30 +39,8 @@ public class MenuPanel extends JPanel {
             }
         });
 
-        JMenuItem payAlter = new JMenuItem("修改");
-        payMenu.add(payAlter);
-        payAlter.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                setContent(new PayAlter());
-            }
-        });
-
-        JMenuItem paySearch = new JMenuItem("查询");
-        payMenu.add(paySearch);
-        paySearch.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                setContent(new PaySearch());
-            }
-        });
-
-        // 部门信息操作
-        JMenu dptMenu = new JMenu("部门信息");
-        menuBar.add(dptMenu);
-
-        JMenuItem dptInput = new JMenuItem("输入");
-        dptMenu.add(dptInput);
+        JMenuItem dptInput = new JMenuItem("部门信息");
+        inputMenu.add(dptInput);
         dptInput.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -92,8 +48,30 @@ public class MenuPanel extends JPanel {
             }
         });
 
-        JMenuItem dptAlter = new JMenuItem("修改");
-        dptMenu.add(dptAlter);
+        // 修改与删除
+        JMenu alterMenu = new JMenu("修改与删除");
+        menuBar.add(alterMenu);
+
+        JMenuItem staffAlter = new JMenuItem("基本信息");
+        alterMenu.add(staffAlter);
+        staffAlter.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setContent(new StaffAlter());
+            }
+        });
+
+        JMenuItem payAlter = new JMenuItem("工资信息");
+        alterMenu.add(payAlter);
+        payAlter.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setContent(new PayAlter());
+            }
+        });
+
+        JMenuItem dptAlter = new JMenuItem("部门信息");
+        alterMenu.add(dptAlter);
         dptAlter.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -101,8 +79,30 @@ public class MenuPanel extends JPanel {
             }
         });
 
-        JMenuItem dptSearch = new JMenuItem("查询");
-        dptMenu.add(dptSearch);
+        // 查询与统计
+        JMenu searchMenu = new JMenu("查询与统计");
+        menuBar.add(searchMenu);
+
+        JMenuItem staffSearch = new JMenuItem("基本信息");
+        searchMenu.add(staffSearch);
+        staffSearch.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setContent(new StaffSearch());
+            }
+        });
+
+        JMenuItem paySearch = new JMenuItem("工资信息");
+        searchMenu.add(paySearch);
+        paySearch.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setContent(new PaySearch());
+            }
+        });
+
+        JMenuItem dptSearch = new JMenuItem("部门");
+        searchMenu.add(dptSearch);
         dptSearch.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

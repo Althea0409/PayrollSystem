@@ -20,7 +20,6 @@ public class Dpt {
     public Integer getDptId() {
         return dptId;
     }
-
     public void setDptId(Integer dptId) {
         this.dptId = dptId;
     }
@@ -28,7 +27,6 @@ public class Dpt {
     public String getDptName() {
         return dptName;
     }
-
     public void setDptName(String dptName) {
         this.dptName = dptName;
     }
@@ -36,7 +34,6 @@ public class Dpt {
     public String getDptHead() {
         return dptHead;
     }
-
     public void setDptHead(String dptHead) {
         this.dptHead = dptHead;
     }
@@ -44,7 +41,6 @@ public class Dpt {
     public Integer getDptMembers() {
         return dptMembers;
     }
-
     public void setDptMembers(Integer dptMembers) {
         this.dptMembers = dptMembers;
     }

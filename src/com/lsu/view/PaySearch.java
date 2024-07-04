@@ -14,9 +14,9 @@ import com.lsu.utils.DbUtil;
 
 public class PaySearch extends JInternalFrame {
 
-    private DbUtil dbUtil; // 声明 DbUtil 实例
-    private JTextArea resultArea; // 用于显示查询结果
-    private JTextField inputField; // 输入框，用于员工编号输入
+    private final DbUtil dbUtil; // 声明 DbUtil 实例
+    private final JTextArea resultArea; // 用于显示查询结果
+    private final JTextField inputField; // 输入框，用于员工编号输入
 
     public PaySearch() {
         super("工资信息查询", true, true, true, true);

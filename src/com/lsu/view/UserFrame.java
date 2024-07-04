@@ -190,4 +190,15 @@ public class UserFrame extends JFrame {
         }
     }
 
+    public static void main(String[] args) {
+        // 设置界面风格为系统默认风格
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        new UserFrame();
+    }
+
 }
