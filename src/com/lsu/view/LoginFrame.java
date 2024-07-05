@@ -27,7 +27,7 @@ public class LoginFrame extends JFrame {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 10, 10, 10); // 间距
+        gbc.insets = new Insets(10, 10, 10, 10);
 
         // 设置字体
         Font titleFont = new Font("微软雅黑", Font.BOLD, 24);
