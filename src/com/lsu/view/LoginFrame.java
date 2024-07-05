@@ -18,9 +18,9 @@ public class LoginFrame extends JFrame {
     private final DbUtil dbUtil = new DbUtil();
     private final UserDao userDao = new UserDao();
 
+    // 创建主窗口
     public LoginFrame() {
-        // 创建主窗口
-        setTitle("员工工资管理系统");
+        setTitle("工资管理系统");
         setSize(500, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,7 +35,7 @@ public class LoginFrame extends JFrame {
         Font textFieldFont = new Font("幼圆", Font.BOLD, 18);
 
         // 大标题
-        JLabel titleLabel = new JLabel("员工工资管理系统", JLabel.CENTER);
+        JLabel titleLabel = new JLabel("工资管理系统", JLabel.CENTER);
         titleLabel.setFont(titleFont);
         gbc.gridwidth = 2;
         gbc.gridx = 0;

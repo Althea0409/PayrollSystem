@@ -18,8 +18,9 @@ public class UserFrame extends JFrame {
     private final DbUtil dbUtil = new DbUtil();
     private JLabel welcomeLabel;
 
+    // 创建用户界面
     public UserFrame() {
-        setTitle("员工工资管理系统 - 员工界面");
+        setTitle("工资管理系统 - 员工界面");
         setSize(1000, 335);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

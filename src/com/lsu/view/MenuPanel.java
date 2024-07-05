@@ -18,7 +18,7 @@ public class MenuPanel extends JPanel {
         contentPanel.repaint();
 
         // 员工信息录入
-        JMenu inputMenu = new JMenu("员工信息录入");
+        JMenu inputMenu = new JMenu("输入与保存");
         menuBar.add(inputMenu);
 
         JMenuItem staffInput = new JMenuItem("基本信息");
@@ -101,7 +101,7 @@ public class MenuPanel extends JPanel {
             }
         });
 
-        JMenuItem dptSearch = new JMenuItem("部门");
+        JMenuItem dptSearch = new JMenuItem("部门信息");
         searchMenu.add(dptSearch);
         dptSearch.addMouseListener(new MouseAdapter() {
             @Override

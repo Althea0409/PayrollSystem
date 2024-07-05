@@ -14,7 +14,7 @@ import com.lsu.utils.DbUtil;
 
 public class PaySearch extends JInternalFrame {
 
-    private final DbUtil dbUtil; // 声明 DbUtil 实例
+    private final DbUtil dbUtil;
     private final JTextArea resultArea; // 用于显示查询结果
     private final JTextField inputField; // 输入框，用于员工编号输入
 
@@ -70,11 +70,12 @@ public class PaySearch extends JInternalFrame {
                     // 获取数据库连接
                     con = dbUtil.getConnection();
 
-                    // 构建SQL查询语句
+                    // 构建SQL查询语句，计算工资
                     String sql = "SELECT e.StaffID, e.Name, " +
                             "(p.BasicPay + p.PositionPay + p.HouseAllowance + p.Allowance + p.BonusPenalty) AS TotalPay, " +
                             "(p.UnionFee + p.WEFee + p.HouseFund + p.Pension) AS TotalDeductions, " +
-                            "(p.BasicPay + p.PositionPay + p.HouseAllowance + p.Allowance + p.BonusPenalty - p.UnionFee - p.WEFee - p.HouseFund - p.Pension) AS NetPay " +
+                            "(p.BasicPay + p.PositionPay + p.HouseAllowance + p.Allowance + p.BonusPenalty - p.UnionFee - " +
+                            "p.WEFee - p.HouseFund - p.Pension) AS NetPay " +
                             "FROM staff e INNER JOIN pay p ON e.StaffID = p.StaffID " +
                             "WHERE e.StaffID=?";
                     pstmt = con.prepareStatement(sql);

@@ -15,6 +15,7 @@ public class StaffAlter extends JInternalFrame {
     private JTable staffTable;
     private DefaultTableModel tableModel;
 
+    // 创建员工信息修改窗口
     public StaffAlter() {
         super("员工信息修改", true, true, true, true);
         staffDao = new StaffDao();
@@ -45,7 +46,7 @@ public class StaffAlter extends JInternalFrame {
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         // 按钮
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10)); // 增大按钮之间的左右间距
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10));
         JButton updateButton = new JButton("修 改");
         JButton deleteButton = new JButton("删 除");
 
@@ -95,7 +96,7 @@ public class StaffAlter extends JInternalFrame {
         setContentPane(mainPanel);
     }
 
-    // 刷新表格
+    // 加载并显示所有员工信息
     void refreshStaffTable() throws Exception {
         List<Staff> staffList = staffDao.getAllStaff();
         tableModel.setRowCount(0);

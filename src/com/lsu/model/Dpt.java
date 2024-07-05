@@ -6,9 +6,6 @@ public class Dpt {
     private String dptHead;
     private Integer dptMembers;
 
-    public Dpt() {
-    }
-
     public Dpt(Integer dptId, String dptName, String dptHead, Integer dptMembers) {
         this.dptId = dptId;
         this.dptName = dptName;

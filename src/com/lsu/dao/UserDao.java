@@ -6,8 +6,8 @@ import com.lsu.utils.ToolUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-public class UserDao {
 
+public class UserDao {
     // 用户登录
     public Users login(Connection con, Users user)throws Exception {
         Users resultUser = null;

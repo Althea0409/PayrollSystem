@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DptDao {
-    private DbUtil dbUtil;
+    private final DbUtil dbUtil;
 
     public DptDao() {
         dbUtil = new DbUtil();
@@ -21,6 +21,7 @@ public class DptDao {
     public int saveDptInfo(int dptId, String dptName, String dptHead, int dptMembers) throws Exception {
         Connection con = null;
         PreparedStatement pstmt = null;
+        // 通过预编译的SQL语句将信息插入到数据库中。
         try {
             con = dbUtil.getConnection();
             String sql = "INSERT INTO department (DptId, DptName, DptHead, DptMembers) " +
@@ -47,6 +48,7 @@ public class DptDao {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        // 通过预编译的SQL语句从数据库中获取所有部门信息，并将其封装成Dpt对象放入List集合中返回。
         try {
             con = dbUtil.getConnection();
             String sql = "SELECT * FROM department";
@@ -77,6 +79,7 @@ public class DptDao {
     public int updateDpt(Dpt dpt) throws Exception {
         Connection con = null;
         PreparedStatement pstmt = null;
+        // 通过预编译的SQL语句更新数据库中的部门信息
         try {
             con = dbUtil.getConnection();
             String sql = "UPDATE department SET DptName=?, DptHead=?, DptMembers=? WHERE DptId=?";
@@ -102,6 +105,7 @@ public class DptDao {
     public int deleteDpt(int dptId) throws Exception {
         Connection con = null;
         PreparedStatement pstmt = null;
+        // 通过预编译的SQL语句删除数据库中的部门信息
         try {
             con = dbUtil.getConnection();
             String sql = "DELETE FROM department WHERE DptId=?";

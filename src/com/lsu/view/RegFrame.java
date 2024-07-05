@@ -73,7 +73,6 @@ public class RegFrame extends JFrame {
 
             @Override
             public void focusLost(FocusEvent e) {
-
                 String text = textField.getText();
                 if(ToolUtil.isEmpty(text)){
                     usernameMes.setText("用户名不能为空");
@@ -116,13 +115,10 @@ public class RegFrame extends JFrame {
                         JOptionPane.showMessageDialog(null, "密码需为6-16位数字和字母的组合");
                         passwordMes.setText("");
                     }
-
                 }
-
             }
             @Override
             public void focusGained(FocusEvent e) {
-
 
             }
         });
@@ -164,7 +160,6 @@ public class RegFrame extends JFrame {
 
             @Override
             public void focusGained(FocusEvent e) {
-
 
             }
         });

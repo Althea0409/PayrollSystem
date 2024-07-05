@@ -225,7 +225,7 @@ public class PayInput extends JInternalFrame {
         }
     }
 
-    // 重置所有字段
+    // 重置文本字段的内容
     private void resetFields() {
         staffIdField.setText("");
         basicPayField.setText("");

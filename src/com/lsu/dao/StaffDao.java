@@ -18,7 +18,8 @@ public class StaffDao {
     }
 
     // 保存员工信息到数据库
-    public int saveStaffInfo(int staffId, String name, String gender, String birthDate, String joinDate, int dptId, String dptName, String position, String title, String polStatus, String marStatus) throws Exception {
+    public int saveStaffInfo(int staffId, String name, String gender, String birthDate, String joinDate, int dptId, String dptName, String position,
+                             String title, String polStatus, String marStatus) throws Exception {
         Connection con = null;
         PreparedStatement pstmt = null;
         try {
@@ -93,7 +94,8 @@ public class StaffDao {
         PreparedStatement pstmt = null;
         try {
             con = dbUtil.getConnection();
-            String sql = "UPDATE staff SET Name=?, Gender=?, BirthDate=?, JoinDate=?, DptId=?, DptName=?, Position=?, Title=?, PolStatus=?, MarStatus=? WHERE StaffID=?";
+            String sql = "UPDATE staff SET Name=?, Gender=?, BirthDate=?, JoinDate=?, DptId=?, DptName=?, " +
+                    "Position=?, Title=?, PolStatus=?, MarStatus=? WHERE StaffID=?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, staff.getName());
             pstmt.setString(2, staff.getGender());
@@ -118,7 +120,6 @@ public class StaffDao {
             dbUtil.closeCon(con);
         }
     }
-
     // 删除员工信息
     public int deleteStaff(int staffId) throws Exception {
         Connection con = null;
